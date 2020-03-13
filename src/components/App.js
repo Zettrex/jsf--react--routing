@@ -4,25 +4,35 @@ import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Home from "./Home.js";
 import AboutUs from "./AboutUs.js";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    NavLink
+} from "react-router-dom";
 
 export default function App() {
     return (
-        <div class="App">
+        <Router class="App">
             <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="/">Website Name</Navbar.Brand>
+                <Nav.Link to="/" excact>
+                    <Navbar.Brand>MyPage</Navbar.Brand>
+                </Nav.Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/aboutus">About</Nav.Link>
+                        <NavLink to="/" exact className="nav-link">Home</NavLink>
+                        <NavLink to="/about" className="nav-link">About</NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
 
             <Container>
-                <Home />
-                <AboutUs />
+                <Switch>
+                    <Route path="/" component={Home} exact/>
+                    <Route path="/about" component={AboutUs}/>
+                </Switch>
             </Container>
-        </div>
+        </Router>
     );
 }
